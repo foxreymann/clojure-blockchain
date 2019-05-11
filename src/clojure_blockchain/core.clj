@@ -34,6 +34,6 @@
   [pow (digest/sha-256 (pr-str (* last-pow pow)))])
 
 (defn proof-of-work [last-pow]
-  (first (filter (fn [p] (is-valid-pow? (second p))) (map (fn [pow] (pair last-pow pow))(range)))))
+  (first (first (filter (fn [p] (is-valid-pow? (second p))) (map (fn [pow] (pair last-pow pow))(range))))))
 
 (proof-of-work 5)
