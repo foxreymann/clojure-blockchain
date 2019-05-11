@@ -30,10 +30,10 @@
 (defn is-valid-pow? [s]
   (string/starts-with? s "0000"))
 
-(defn pair [last-pow y]
-  [y (digest/sha-256 (pr-str (* last-pow y)))])
+(defn pair [last-pow pow]
+  [pow (digest/sha-256 (pr-str (* last-pow pow)))])
 
 (defn proof-of-work [last-pow]
-  (first (filter (fn [p] (is-valid-pow? (second p))) (map (fn [y] (pair last-pow y))(range)))))
+  (first (filter (fn [p] (is-valid-pow? (second p))) (map (fn [pow] (pair last-pow pow))(range)))))
 
 (proof-of-work 5)
