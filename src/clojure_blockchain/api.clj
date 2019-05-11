@@ -14,7 +14,9 @@
 
 (defn mine [] nil)
 
-(defn new-transaction [sender recipient amount] (println sender recipient amount))
+(defn new-transaction [sender recipient amount]
+  (swap! blockchain blockchain/new-transaction sender recipient amount)
+  (blockchain/last-block-idx @blockchain))
 
 (defn full-chain []
   {:chain (:chain @blockchain)

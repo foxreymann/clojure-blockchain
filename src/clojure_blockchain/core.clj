@@ -4,6 +4,9 @@
 
 (defn last-block [blockchain] (last (:chain blockchain)))
 
+(defn last-block-idx [blockchain] (inc (or (:index (last-block blockchain)) 0)))
+
+
 (defn empty-blockchain []
   {:chain []
    :current-transactions []})
@@ -22,10 +25,6 @@
 
 (defn new-transaction [blockchain sender recipient amount]
   (update blockchain :current-transactions conj { :sender sender, :recipient recipient, :amount amount }))
-
-;(new-transaction (empty-blockchain) "A" "B" 2)
-
-;(hash-block (new-block (empty-blockchain) 10003333 "hash-of-genesis-block"))
 
 (defn is-valid-pow? [s]
   (string/starts-with? s "0000"))
