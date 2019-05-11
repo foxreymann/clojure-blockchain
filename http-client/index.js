@@ -15,7 +15,9 @@ req.use(prefix('http://localhost:3000'))
      recipient: "B",
      amount: 5
     })
+    console.log(res.body)
 
+    res = await req.get('/chain')
     console.log(res.body)
 
   } catch (err) {

@@ -20,6 +20,7 @@
 
 (defn full-chain []
   {:chain (:chain @blockchain)
+   :current-transactions (:current-transactions @blockchain)
    :length (count (:chain @blockchain))})
 
 (defroutes api
