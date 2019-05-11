@@ -10,7 +10,7 @@
    :headers {"Content-Type" "application/json; charset=utf-8"}
    :body    (json/generate-string data)})
 
-(def blockchain (atom (blockchain/empty-blockchain)))
+(defonce blockchain (atom (blockchain/new-block (blockchain/empty-blockchain) 100 1)))
 
 (defn mine [] nil)
 

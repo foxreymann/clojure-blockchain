@@ -6,7 +6,6 @@
 
 (defn last-block-idx [blockchain] (inc (or (:index (last-block blockchain)) 0)))
 
-
 (defn empty-blockchain []
   {:chain []
    :current-transactions []})
@@ -17,11 +16,13 @@
   (digest/sha-256 (pr-str block)))
 
 (defn new-block [blockchain proof prev-hash]
-  {:index (-> blockchain :chain count inc)
-   :timestamp (System/currentTimeMillis)
-   :transaction (:current-transactions blockchain)
-   :proof proof
-   :prev-hash (or prev-hash (hash-block (last-block blockchain)))})
+  (let [block {:index (-> blockchain :chain count)
+               :timestamp (System/currentTimeMillis)
+               :transaction (:current-transactions blockchain)
+               :proof proof
+               :prev-hash (or prev-hash (hash-block (last-block blockchain)))}]
+    {:chain (conj (:chain blockchain) block)
+     :current-transactions []}))
 
 (defn new-transaction [blockchain sender recipient amount]
   (update blockchain :current-transactions conj { :sender sender, :recipient recipient, :amount amount }))
