@@ -1,5 +1,6 @@
 (ns clojure-blockchain.core
- (:require digest))
+ (:require digest
+           [clojure.string :as string]))
 
 (defn last-block [blockchain] (last (:chain blockchain)))
 
@@ -25,3 +26,14 @@
 (new-transaction (empty-blockchain) "A" "B" 2)
 
 (hash-block (new-block (empty-blockchain) 10003333 "hash-of-genesis-block"))
+
+(defn ends-with-zero? [s]
+  (string/ends-with? s "0"))
+
+(defn pair [x y]
+  [y (digest/sha-256 (pr-str (* x y)))])
+
+(defn toy [x]
+  (first (filter (fn [p] (ends-with-zero? (second p))) (map (fn [y] (pair x y))(range)))))
+
+(toy 5)
