@@ -30,10 +30,18 @@
 (defn ends-with-zero? [s]
   (string/ends-with? s "0"))
 
+(defn is-valid-pow? [s]
+  (string/starts-with? s "0000"))
+
 (defn pair [x y]
   [y (digest/sha-256 (pr-str (* x y)))])
 
 (defn toy-proof-of-work [x]
   (first (filter (fn [p] (ends-with-zero? (second p))) (map (fn [y] (pair x y))(range)))))
 
+(defn proof-of-work [x]
+  (first (filter (fn [p] (is-valid-pow? (second p))) (map (fn [y] (pair x y))(range)))))
+
 (toy-proof-of-work 5)
+
+(proof-of-work 5)
