@@ -10,7 +10,12 @@ req.use(prefix('http://localhost:3000'))
     res = await req.get('/mine')
     console.log(res.body)
 
-    res = await req.post('/transactions/new').send({})
+    res = await req.post('/transactions/new').send({
+     sender: "A",
+     recipient: "B",
+     amount: 5
+    })
+
     console.log(res.body)
 
   } catch (err) {
