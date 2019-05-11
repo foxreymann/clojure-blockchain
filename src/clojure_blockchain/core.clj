@@ -33,7 +33,7 @@
 (defn pair [x y]
   [y (digest/sha-256 (pr-str (* x y)))])
 
-(defn toy [x]
+(defn toy-proof-of-work [x]
   (first (filter (fn [p] (ends-with-zero? (second p))) (map (fn [y] (pair x y))(range)))))
 
-(toy 5)
+(toy-proof-of-work 5)
