@@ -4,10 +4,13 @@ req.use(prefix('http://localhost:3000'))
 
 ;(async () => {
   try {
-    let res = await req.get('/foxjson')
+    res = await req.get('/chain')
     console.log(res.body)
 
-    res = await req.get('/chain')
+    res = await req.get('/mine')
+    console.log(res.body)
+
+    res = await req.post('/transactions/new').send({})
     console.log(res.body)
 
   } catch (err) {
