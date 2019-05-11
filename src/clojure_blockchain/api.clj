@@ -11,6 +11,10 @@
 
 (def blockchain (atom (blockchain/empty-blockchain)))
 
+(defn mine [] nil)
+
+(defn new-transaction [] nil)
+
 (defn full-chain []
   {:chain (:chain @blockchain)
    :length (count (:chain @blockchain))})
@@ -18,6 +22,7 @@
 (defroutes app
   (GET "/" [] "<h1>Hello Fox")
   (GET "/chain" [] (json-response (full-chain)))
-  (GET "/foxjson" [] (json-response {:name "Fox"}))
+  (GET "/mine" [] (json-response (mine)))
+  (POST "/transactions/new" [] (json-response (new-transaction)))
   (route/not-found "<h1>Page not found</h1>"))
 
