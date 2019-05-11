@@ -8,7 +8,7 @@
   {:chain []
    :current-transactions []})
 
-(empty-blockchain)
+;(empty-blockchain)
 
 (defn hash-block [block]
   (digest/sha-256 (pr-str block)))
@@ -23,9 +23,9 @@
 (defn new-transaction [blockchain sender recipient amount]
   (update blockchain :current-transactions conj { :sender sender, :recipient recipient, :amount amount }))
 
-(new-transaction (empty-blockchain) "A" "B" 2)
+;(new-transaction (empty-blockchain) "A" "B" 2)
 
-(hash-block (new-block (empty-blockchain) 10003333 "hash-of-genesis-block"))
+;(hash-block (new-block (empty-blockchain) 10003333 "hash-of-genesis-block"))
 
 (defn is-valid-pow? [s]
   (string/starts-with? s "0000"))
@@ -36,4 +36,4 @@
 (defn proof-of-work [last-pow]
   (first (first (filter (fn [p] (is-valid-pow? (second p))) (map (fn [pow] (pair last-pow pow))(range))))))
 
-(proof-of-work 5)
+;(proof-of-work 5)
