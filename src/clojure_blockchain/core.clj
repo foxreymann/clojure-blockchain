@@ -6,12 +6,17 @@
 
 (empty-blockchain)
 
-(defn new-block [blockchain] nil)
+(defn hash-block [blockchain] nil)
+
+(defn new-block [blockchain proof prev-hash]
+  {:index (inc (count (:chain blockchain)))
+   :timestamp (System/currentTimeMillis)
+   :transaction (:current-transactions blockchain)
+   :proof proof
+   :prev-hash (or prev-hash (hash-block (last (:chain blockchain))))})
 
 (defn new-transaction [blockchain sender recipient amount]
   (update blockchain :current-transactions conj { :sender sender, :recipient recipient, :amount amount }))
-
-(defn hash-block [blockchain] nil)
 
 (defn last-block [blockchain] nil)
 
